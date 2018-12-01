@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
 
         detailsPanel = new DetailsPanel();
         ovalPanel = new OvalPanel();
-
+        ovalPanel.ovalShape.setMyColor(detailsPanel.redSlider.getValue(), detailsPanel.greenSlider.getValue(), detailsPanel.blueSlider.getValue());
 
         //add swing components to content pane
         Container c = getContentPane();

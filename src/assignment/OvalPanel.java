@@ -30,7 +30,6 @@ public class OvalPanel extends JPanel {
         diamLabel = new JLabel("Diameter = " + diameter);
         ovalShape = new OvalShape();
         ovalShape.setDiameter(diamSlider.getValue());
-        ovalShape.setMyColor(Color.RED);
 
         //set listeners
         diamSlider.addChangeListener(new ChangeListener() {

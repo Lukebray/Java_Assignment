@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class OvalShape extends JPanel {
     private int diameter = 100;
-    private Color myColor = Color.RED;
+    private Color myColor;
 
     //create the actual panel
     public OvalShape() {
@@ -16,16 +16,19 @@ public class OvalShape extends JPanel {
         setBorder(BorderFactory.createLoweredSoftBevelBorder());
     }
 
-    public void setMyColor(Color theColor) {
-        this.myColor = theColor;
+    public void setMyColor(int r, int g, int b) {
+       this.myColor = new Color(r,g,b);
     }
+
+
 
     //create the oval
     @Override
     public void paintComponent(Graphics g) {
+        g.setColor(myColor);
         super.paintComponent(g);
         g.fillOval(0, 0, diameter, diameter);
-        g.setColor(myColor);
+
     }
 
     //method for setting the diameter

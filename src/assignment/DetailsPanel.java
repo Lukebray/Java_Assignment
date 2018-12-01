@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class DetailsPanel extends JPanel {
 
-    private JSlider redSlider, blueSlider, greenSlider;
-    private JLabel redLabel, blueLabel, greenLabel;
+    public JSlider redSlider, blueSlider, greenSlider;
+    public JLabel redLabel, blueLabel, greenLabel;
+    public int red, green, blue;
 
     public DetailsPanel() {
-
 
         Dimension size = getPreferredSize();
         size.width = 250;
@@ -31,6 +31,7 @@ public class DetailsPanel extends JPanel {
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        red = redSlider.getValue();
                         redLabel.setText("Red = " + redSlider.getValue());
                     }
                 }
@@ -41,6 +42,7 @@ public class DetailsPanel extends JPanel {
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        green = greenSlider.getValue();
                         greenLabel.setText("Green = " + greenSlider.getValue());
                     }
                 }
@@ -51,6 +53,7 @@ public class DetailsPanel extends JPanel {
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        blue = blueSlider.getValue();
                         blueLabel.setText("Blue = " + blueSlider.getValue());
                     }
                 }
