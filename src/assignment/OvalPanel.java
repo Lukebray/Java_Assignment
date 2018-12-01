@@ -8,7 +8,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class OvalPanel extends JPanel {
-    public int diameter = 100; //default diameter of the panel
+    public int diameter;
     public JSlider diamSlider;
     public JLabel diamLabel;
     public OvalShape ovalShape;
@@ -30,6 +30,7 @@ public class OvalPanel extends JPanel {
         diamLabel = new JLabel("Diameter = " + diameter);
         ovalShape = new OvalShape();
         ovalShape.setDiameter(diamSlider.getValue());
+        ovalShape.setMyColor(Color.RED);
 
         //set listeners
         diamSlider.addChangeListener(new ChangeListener() {
