@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OvalShape extends JPanel {
-    private int diameter = 100;
-    private Color myColor;
+    public int diameter, red, green, blue;
+    public Color myColor;
 
     //create the actual panel
     public OvalShape() {
@@ -16,19 +16,13 @@ public class OvalShape extends JPanel {
         setBorder(BorderFactory.createLoweredSoftBevelBorder());
     }
 
-    public void setMyColor(int r, int g, int b) {
-       this.myColor = new Color(r,g,b);
-    }
-
-
-
     //create the oval
     @Override
     public void paintComponent(Graphics g) {
-        g.setColor(myColor);
         super.paintComponent(g);
+        g.setColor(myColor = new Color(red, green, blue));
         g.fillOval(0, 0, diameter, diameter);
-
+        repaint();
     }
 
     //method for setting the diameter

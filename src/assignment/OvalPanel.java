@@ -8,56 +8,99 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class OvalPanel extends JPanel {
-    public int diameter;
-    public JSlider diamSlider;
+    public JSlider diamSlider, redSlider, greenSlider, blueSlider;
     public JLabel diamLabel;
     public OvalShape ovalShape;
+    public String radius;
 
     public OvalPanel() {
 
         Dimension size = getPreferredSize();
-        size.width = 500;
+        size.width = 750;
         setPreferredSize(size);
+        setBorder(BorderFactory.createLoweredSoftBevelBorder());
 
         //create components
-        diamSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 300, 100);
+        redSlider = new JSlider(SwingConstants.VERTICAL, 0, 255, 0);
+        greenSlider = new JSlider(SwingConstants.VERTICAL, 0, 255, 0);
+        blueSlider = new JSlider(SwingConstants.VERTICAL, 0, 255, 0);
+
+        diamSlider = new JSlider(SwingConstants.VERTICAL, 0, 300, 100);
         diamSlider.setSnapToTicks(true);
         diamSlider.setMajorTickSpacing(100);
         diamSlider.setMinorTickSpacing(25);
         diamSlider.setPaintTicks(true);
         diamSlider.setPaintLabels(true);
 
-        diamLabel = new JLabel("Diameter = " + diameter);
-        ovalShape = new OvalShape();
-        ovalShape.setDiameter(diamSlider.getValue());
-
         //set listeners
-        diamSlider.addChangeListener(new ChangeListener() {
+        diamSlider.addChangeListener(
+                new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                diamLabel.setText("Diameter = " + diamSlider.getValue());
                 ovalShape.setDiameter(diamSlider.getValue());
             }
         });
 
+        redSlider.addChangeListener(
+                new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        ovalShape.red = redSlider.getValue();
+                    }
+                }
+        );
+
+        greenSlider.addChangeListener(
+                new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        ovalShape.green = greenSlider.getValue();
+                    }
+                }
+        );
+
+        blueSlider.addChangeListener(
+                new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        ovalShape.blue = blueSlider.getValue();
+                    }
+                }
+        );
+
+        ovalShape = new OvalShape();
+        ovalShape.setDiameter(diamSlider.getValue());
+
+        radius = "testing";
 
         //set layout
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0,10,0,10);
 
-        ////////first row////////
+        ////////first column////////
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(ovalShape, gbc);
-
-        ////////second row////////
-        gbc.gridx = 0;
-        gbc.gridy = 1;
         add(diamSlider, gbc);
 
-        ////////third row////////
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(diamLabel, gbc);
+        ////////second column////////
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        add(redSlider, gbc);
+
+        ////////third column////////
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        add(greenSlider, gbc);
+
+        ////////fourth column////////
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        add(blueSlider, gbc);
+
+        ////////fifth column////////
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        add(ovalShape, gbc);
     }
 }
