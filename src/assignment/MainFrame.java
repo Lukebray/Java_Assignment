@@ -8,25 +8,53 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
 
     private OvalPanel ovalPanel;
+    private String diam, circum, area;
+    private JTextArea textArea;
 
     public MainFrame(String title) {
         super(title);
 
-        //Set layout manager
-        setLayout(new BorderLayout());
+        //Set layout managers
+        setLayout(new BorderLayout()); //main layout manager
+
+        JPanel holder = new JPanel(); //panel to hold 2 components
+        holder.setLayout(new BorderLayout());
 
         //create swing components
         ovalPanel = new OvalPanel();
-        JTextArea textArea = new JTextArea(5, 5);
+        JButton calculate = new JButton("Calculate");
+        textArea = new JTextArea(5, 5);
         textArea.setEditable(false);
+        textArea.setBorder(BorderFactory.createTitledBorder("Information"));
 
-        textArea.insert("Position 1", 1);
-        textArea.insert("Position 0", 0);
+        //populate textArea with initial values
+        area = ovalPanel.areaLabel.getText();
+        diam = ovalPanel.diamLabel.getText();
+        circum = ovalPanel.circumLabel.getText();
+        textArea.append(area + "\n");
+        textArea.append(diam + "\n");
+        textArea.append(circum + "\n");
 
-        //add swing components to content pane
+        //button to recalculate values in textArea
+        calculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText(null); //clear textArea
+                area = ovalPanel.areaLabel.getText();
+                diam = ovalPanel.diamLabel.getText();
+                circum = ovalPanel.circumLabel.getText();
+                textArea.append(area + "\n");
+                textArea.append(diam + "\n");
+                textArea.append(circum + "\n");
+            }
+        });
+
         Container c = getContentPane();
 
-        c.add(textArea, BorderLayout.SOUTH);
-        c.add(ovalPanel, BorderLayout.EAST);
+        //add components to layout
+        c.add(ovalPanel, BorderLayout.CENTER);
+        c.add(holder, BorderLayout.SOUTH);
+        holder.add(textArea, BorderLayout.NORTH);
+        holder.add(calculate, BorderLayout.SOUTH);
     }
 }

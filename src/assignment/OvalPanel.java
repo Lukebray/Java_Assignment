@@ -9,9 +9,8 @@ import java.awt.*;
 
 public class OvalPanel extends JPanel {
     public JSlider diamSlider, redSlider, greenSlider, blueSlider;
-    public JLabel diamLabel;
+    public JLabel diamLabel, circumLabel, areaLabel;
     public OvalShape ovalShape;
-    public String radius;
 
     public OvalPanel() {
 
@@ -32,12 +31,17 @@ public class OvalPanel extends JPanel {
         diamSlider.setPaintTicks(true);
         diamSlider.setPaintLabels(true);
 
+        diamLabel = new JLabel("Diameter = " + diamSlider.getValue());
+
         //set listeners
         diamSlider.addChangeListener(
                 new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ovalShape.setDiameter(diamSlider.getValue());
+                diamLabel.setText("Diameter = " + diamSlider.getValue());
+                areaLabel.setText("Area = " + ovalShape.area(diamSlider.getValue()));
+                circumLabel.setText("Circumference = " + ovalShape.circum(diamSlider.getValue()));
             }
         });
 
@@ -70,8 +74,8 @@ public class OvalPanel extends JPanel {
 
         ovalShape = new OvalShape();
         ovalShape.setDiameter(diamSlider.getValue());
-
-        radius = "testing";
+        areaLabel = new JLabel("Area = " + ovalShape.area(diamSlider.getValue()));
+        circumLabel = new JLabel("Circumference = " + ovalShape.circum(diamSlider.getValue()));
 
         //set layout
         setLayout(new GridBagLayout());

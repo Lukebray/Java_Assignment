@@ -6,6 +6,7 @@ import java.awt.*;
 public class OvalShape extends JPanel {
     public int diameter, red, green, blue;
     public Color myColor;
+    public double pi = 3.14;
 
     //create the actual panel
     public OvalShape() {
@@ -30,5 +31,15 @@ public class OvalShape extends JPanel {
         //if diam invalid set to 10
         diameter = (newDiameter >=0 ? newDiameter : 10);
         repaint(); //repaint panel
+    }
+
+    public double area(double diameter) {
+        double radius = diameter / 2;
+        return pi*radius*radius;
+    }
+
+    public double circum(double diameter) {
+        double radius  = diameter / 2;
+        return 2*pi*radius;
     }
 }
